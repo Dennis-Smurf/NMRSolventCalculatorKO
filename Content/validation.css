@@ -1,0 +1,19 @@
+﻿.validationMessage {
+    display: none;
+    visibility:collapse;
+}
+
+.groupValidationMessage {
+    color: red;
+    font-size: small;
+    display: block;
+}
+
+.table td {
+vertical-align:middle;
+}
+
+input[type="text"] {
+   margin-bottom: 0px;
+}
+

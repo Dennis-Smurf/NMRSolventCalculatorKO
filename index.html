@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>nmr massa percentage calculator</title>
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/solvents.css" rel="stylesheet" />
+    <link href="Content/validation.css" rel="stylesheet" />
+</head>
+<body>
+    <br />       
+    <div class="span8">
+     <h4><a href="https://github.com/Dennis-Smurf/NMRSolventCalculatorKO">NMRSolventCalculatorKO</a></h4>
+     <br />
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>(im)purity</th>
+                        <th>mass</th>
+                        <th># of H</th>
+                        <th>integral</th>
+                        <th>mol%</th>
+                        <th>wt%</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: selectedSolvents">
+                    <tr>
+                        <td>
+                            <!-- ko if: $index() != 0 -->
+                            <div class="btn-group">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span data-bind="text: selectedSolvent().name"></span>
+                                    <span class="caret"></span>
+                                </a>&nbsp;
+                            <i data-bind="attr: { 'class': 'solvent-' + selectedSolvent().name }"></i>
+                                <div class="dropdown-menu span8" data-bind="foreach: $root.solvents">
+                                    <div class="span2">
+                                        <a href="#" data-bind="click: $parent.selectSolvent">
+                                            <i data-bind="attr: { 'class': 'solvent-' + name }"></i>
+                                            <span data-bind="text: name"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: $index() == 0 -->
+                            <span data-bind="text: selectedSolvent().name"></span>
+                            <!-- /ko -->
+                        </td>
+                        <td>
+                            <input type="text" class="mass input-mini" placeholder="Mass" data-bind="value: mass, valueUpdate: 'afterkeydown'" />
+                            
+                        </td>
+                        <td>
+                            <input type="text" data-bind="value: nrH, valueUpdate: 'afterkeydown'" placeholder="nrH" class="input-mini" />
+                        </td>
+                        <td>
+                            <input type="text" data-bind="value: integral, valueUpdate: 'afterkeydown'" placeholder="integral" class="input-mini" />
+                        </td>
+                        <td><div data-bind="visible: appErrors">
+                            <span data-bind="text: molPercentageFormatted"></span>%
+                            </div>
+                        </td>
+                        <td><div data-bind="visible: appErrors">
+                            <span data-bind="text: weightPercentageFormatted"></span>%
+                            </div>
+                        </td>
+                        <td>
+                            <!-- ko if: $index() != 0 -->
+                            <button class="btn" type="button" data-bind='click: $parent.removeSolvent'>Remove</button>
+                            <!-- /ko -->
+                        </td>
+                        <td>
+                            <code data-bind="visible:errors().length!=0">Please enter a number</code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+          
+            <button class="btn" data-bind='click: addSolvent'>Add im(purity)</button>
+
+    </div>
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <script src="Scripts/knockout-2.2.1.js"></script>
+    <script src="Scripts/knockout.validation.js"></script>
+    <script src="Scripts/Solvents.js"></script>
+    <script src="Scripts/ViewModel.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+
+</body>
+</html>
